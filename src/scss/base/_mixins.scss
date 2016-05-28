@@ -1,0 +1,34 @@
+@mixin outlined {
+    @if($debugging) {
+        outline: 1px solid red;
+    }
+}
+
+@mixin clearfix {
+  overflow: hidden;
+}
+
+@mixin boxSizing {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box; 
+  -o-box-sizing: border-box;  
+  box-sizing: border-box;  
+}
+
+@mixin bgCover {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+

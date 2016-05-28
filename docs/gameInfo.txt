@@ -1,0 +1,3 @@
+This is a survival time-based score game where
+a user will try to survive and defend object from
+being destroyed as long as the user can
