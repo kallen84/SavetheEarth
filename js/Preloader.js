@@ -1,47 +1,38 @@
-/* preload the game contents. preload means to load in advance. Load before */
-
-
-/* Here we want to declare things we need when preloading the game
- * We also pass the game object as a parameter 
+/* 
+ * preload the game contents. preload means to load in advance. Load before 
 */
+
+
+/* Declare things we need when preloading and pass the game object as a parameter */
 BunnyDefender.Preloader = function(game) {
     this.preloadBar = null;
     this.titleText = null;
-    /* We use this.ready to determine whether everything's preloaded and ready to run or not.
+    /* 
+     * this.ready determine whether everything's preloaded and ready to run or not.
      * set the ready to equal to false, because we haven't loaded anything up yet, our game 
      * is not ready. 
     */
     this.ready = false;
 };
 
-/* This function spec out all of our different phaser functions for our preloader.
- * This includes (preload:) functions, (create:) functions, and (update:) functions. 
+/* 
+ * Preloader.prototype-object specs out all of our different phaser functions for our 
+ * preloader. 
 */
 BunnyDefender.Preloader.prototype = {
-	/* preload function contains references to the preloadBar object that we created.
-     * our properties is also even called (Assets)
-    */
+     /* Preload function contains references to the preloadBar object that we created */
 	preload: function () {
-        /* adding preloadBar as a sprite. it allows you to do is use a specific Sprite as a 
-         * preload, and it crops it in certain ways. We pass in this.world.centerX, which is 
-         * game world centerpoint, along the X axis. And we also pass in the centerpoint on 
-         * the Y axis. This centers our preload bar in the middle of the screen. 
-         * We alse reference preloader bar, which we define in Boot.js, inside of our preload function. 
-         * So we have preloader bar, and titleimage.
+        /* 
+         * adding preloadBar as a sprite. it allows to use a specific Sprite as a preload,
+         * and it crops it in certain ways. We also reference preloader bar which is 
+         * centered in the middle of the screen.  
         */
 		this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloaderBar');
 		this.preloadBar.anchor.setTo(0.5, 0.5);
-        /* setPreloadSprite is going to assign this Sprite that we've created to our actual preloader 
-         * mechanism.
-        */
+        /* setPreloadSprite is going to assign this Sprite that we've created to our actual preloader mechanism */
 		this.load.setPreloadSprite(this.preloadBar);
-        /* Here we create our title text, and add this to the game as an image. We then centering
-         * it along the X and the Y axis.  
-        */
 		this.titleText = this.add.image(this.world.centerX, this.world.centerY-220, 'titleimage');
-		/* we set the anchor to 0.5 and 0.5. This sets the transform point with an anchor 
-         * point to the center of the object. 
-        */
+		/* 0.5 and 0.5. sets the transform point with an anchor point to the center of the object */
         this.titleText.anchor.setTo(0.5, 0.5);
         /* Load the title-background */
         this.load.image('titlescreen', 'images/startpageBG.png');
@@ -64,9 +55,8 @@ BunnyDefender.Preloader.prototype = {
         this.load.audio('select_audio', 'audio/select.mp3');
         this.load.audio('game_audio', 'audio/bgm.mp3');
 	},
-    /* The create function fires off once everything's happened in the preload function. 
-     * We then don't need to crop that preloadBar anymore. It has expanded to 100%, and we 
-     * can turn cropEnabled off on that asset. 
+    /* 
+     * Create-function fires off once everything's happened in the preload function. 
     */
 	create: function () {
         /* We set cropEnabled to false, this force show the whole thing */
@@ -77,14 +67,13 @@ BunnyDefender.Preloader.prototype = {
      * our game is ready to run.
     */
 	update: function () {
-        /* the if-statement checks to make sure that the sound is not only loaded up but is also fully 
-         * decoded before we run our start menu
-         * we'll check the largest file that we have, which is (game_audio)
-         * 
+        /* 
+         * if-statement checks to make sure that the sound is not only loaded up but is 
+         * also fully decoded before we run our start menu
          */
         if(this.cache.isSoundDecoded('game_audio') && this.ready == false) {
             this.ready = true;
-            /*  Start our menu state up when everything's loaded. */
+            /*  Start our menu when everything's loaded. */
             this.state.start('StartMenu');
         }
 	}
